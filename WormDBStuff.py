@@ -43,9 +43,9 @@ class WormPointBase(object):
 	# The height of upward continuation from which the grad and coordinates were drawn.
 	height = Column(Float)
 	# A PostGIS point geometry, in the native CRS
-	pt = Column(Geometry('POINT'),index=True)
+	pt = Column(Geometry('POINTZM'),index=True)
 	# A duplicate of pt in WGS84 coordinates; converted by PostGIS at write-time
-	wgs84_pt = Column(Geometry('POINT'),index=True)
+	wgs84_pt = Column(Geometry('POINTZM'),index=True)
 
 	
 class WormLevelBase(object):
