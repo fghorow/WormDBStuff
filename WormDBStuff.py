@@ -104,11 +104,11 @@ def WormDBStuffFactory(basename):
 	
 	class WormLevelStd(Base,WormLevelBase):
 		__tablename__ = levels_name
-		point = relationship('WormPoint', secondary=levels_points_name)
+		point = relationship('WormPointStd', secondary=levels_points_name)
 		
 	class WormPointStd(Base,WormPointBase):
 		__tablename__ = points_name
-		level = relationship('WormLevel', secondary=levels_points_name)
+		level = relationship('WormLevelStd', secondary=levels_points_name)
 		
 	class WormLevelPointsStd(Base,WormLevelPointsBase):
 		__tablename__ = levels_points_name
@@ -118,9 +118,9 @@ def WormDBStuffFactory(basename):
 		# This is the point id of the END point of a line segment.
 		point_id = Column(Integer, ForeignKey(points_name + '.worm_point_id'), primary_key=True)
 		# Database magic that links entries in this table with entries in another table
-		worm_level = relationship(WormLevel, backref=backref("worm_point_assoc"))
+		worm_level = relationship(WormLevelStd, backref=backref("worm_point_assoc"))
 		# Database magic that links entries in this table with entries in another table
-		worm_point = relationship(WormPoint, backref=backref("worm_level_assoc"))
+		worm_point = relationship(WormPointStd, backref=backref("worm_level_assoc"))
 		
 	tablenames = {}
 	tablenames['layer_name'] = layer_name
