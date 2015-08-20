@@ -102,15 +102,15 @@ def WormDBStuffFactory(basename):
 	levels_name = basename + '_levels'
 	levels_points_name = basename + '_levels_points'
 	
-	class WormLevel(Base,WormLevelBase):
+	class WormLevelStd(Base,WormLevelBase):
 		__tablename__ = levels_name
 		point = relationship('WormPoint', secondary=levels_points_name)
 		
-	class WormPoint(Base,WormPointBase):
+	class WormPointStd(Base,WormPointBase):
 		__tablename__ = points_name
 		level = relationship('WormLevel', secondary=levels_points_name)
 		
-	class WormLevelPoints(Base,WormLevelPointsBase):
+	class WormLevelPointsStd(Base,WormLevelPointsBase):
 		__tablename__ = levels_points_name
 		# This table has a "composite primary key" composed of the first 2 ForeignKey entries and the internal primary key
 		# This is the level_id in the external table
@@ -128,7 +128,7 @@ def WormDBStuffFactory(basename):
 	tablenames['levels_name'] = levels_name
 	tablenames['levels_points_name'] = levels_points_name
 		
-	return WormPoint, WormLevelPoints, WormLevel, tablenames
+	return WormPointStd, WormLevelPointsStd, WormLevelStd, tablenames
 	
  
  
