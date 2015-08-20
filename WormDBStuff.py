@@ -72,7 +72,7 @@ class WormLevelPointsBase(object):
 	# FIXME (maybe) This terminology needs to be cleaned up.
 	seg_sequence_num = Column(Integer)
 	# This holds the PostGIS geometry structure for a single edge, in some native CRS.
-	line_segmt = Column(Geometry('LINESTRING'),index=True)
+	line_segmt = Column(Geometry('LINESTRINGZM'),index=True)
 	# This scalar gradient value is derived from the average of the point grads on either end of the edge
 	# Currently, the upstream code is doing that for the LOG(value), so this is in fact now
 	# sqrt(grad(pt1) * grad(pt2))
@@ -83,7 +83,7 @@ class WormLevelPointsBase(object):
 	# FIXME (maybe) this could and probably should be an actual relation into the points table, for ease of retrieval.
 	start_point_id = Column(Integer)
 	# This is a duplicate of line_segmt but explicitly stored in wgs84.
-	wgs84_line_segmt = Column(Geometry('LINESTRING'),index=True)
+	wgs84_line_segmt = Column(Geometry('LINESTRINGZM'),index=True)
 
 Base = declarative_base()
 
