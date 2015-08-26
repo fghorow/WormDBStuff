@@ -88,7 +88,7 @@ class WormLevelPointsBase(object):
 Base = declarative_base()
 
 
-def WormDBStuffFactory(basename):
+def WormDBStuffFactory(basename,to_max_grad = False):
 	""" A Factory function for creating sqlalchemy ORM classes.
 	
 		Design goal: an external thingy that has something like the following signature:
@@ -100,7 +100,10 @@ def WormDBStuffFactory(basename):
 	layer_name = basename
 	points_name = basename + '_points'
 	levels_name = basename + '_levels'
-	levels_points_name = basename + '_levels_points'
+	if to_max_grad == True:
+		levels_points_name = basename + '_levels_points_to_max_grad'
+	else:
+		levels_points_name = basename + '_levels_points'
 	
 	class WormLevel(Base,WormLevelBase):
 		__tablename__ = levels_name
