@@ -105,15 +105,15 @@ def WormDBStuffFactory(basename,to_max_grad = False):
 	else:
 		levels_points_name = basename + '_levels_points'
 	
-	class WormLevel(Base,WormLevelBase):
+	class WormLevelStd(Base,WormLevelBase):
 		__tablename__ = levels_name
-		point = relationship('WormPoint', secondary=levels_points_name)
+		point = relationship('WormPointStd', secondary=levels_points_name)
 		
-	class WormPoint(Base,WormPointBase):
+	class WormPointStd(Base,WormPointBase):
 		__tablename__ = points_name
-		level = relationship('WormLevel', secondary=levels_points_name)
+		level = relationship('WormLevelStd', secondary=levels_points_name)
 		
-	class WormLevelPoints(Base,WormLevelPointsBase):
+	class WormLevelPointsStd(Base,WormLevelPointsBase):
 		__tablename__ = levels_points_name
 		# This table has a "composite primary key" composed of the first 2 ForeignKey entries and the internal primary key
 		# This is the level_id in the external table
@@ -121,9 +121,9 @@ def WormDBStuffFactory(basename,to_max_grad = False):
 		# This is the point id of the END point of a line segment.
 		point_id = Column(Integer, ForeignKey(points_name + '.worm_point_id'), primary_key=True)
 		# Database magic that links entries in this table with entries in another table
-		worm_level = relationship(WormLevel, backref=backref("worm_point_assoc"))
+		worm_level = relationship(WormLevelStd, backref=backref("worm_point_assoc"))
 		# Database magic that links entries in this table with entries in another table
-		worm_point = relationship(WormPoint, backref=backref("worm_level_assoc"))
+		worm_point = relationship(WormPointStd, backref=backref("worm_level_assoc"))
 		
 	tablenames = {}
 	tablenames['layer_name'] = layer_name
@@ -131,7 +131,7 @@ def WormDBStuffFactory(basename,to_max_grad = False):
 	tablenames['levels_name'] = levels_name
 	tablenames['levels_points_name'] = levels_points_name
 		
-	return WormPoint, WormLevelPoints, WormLevel, tablenames
+	return WormPointStd, WormLevelPointsStd, WormLevelStd, tablenames
 	
  
  
