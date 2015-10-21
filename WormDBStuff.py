@@ -101,7 +101,7 @@ def WormDBStuffFactory(basename,to_max_grad = False):
 	points_name = basename + '_points'
 	levels_name = basename + '_levels'
 	if to_max_grad == True:
-		levels_points_name = basename + '_levels_points_to_max_grad'
+		levels_points_name = basename + '_to_max_grad_levels_points'
 	else:
 		levels_points_name = basename + '_levels_points'
 	
