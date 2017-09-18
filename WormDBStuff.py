@@ -100,8 +100,11 @@ def WormDBStuffFactory(basename,to_max_grad = False):
 	layer_name = basename
 	points_name = basename + '_points'
 	levels_name = basename + '_levels'
+	# Use _levels_points_to_max_grad for PSG
+	# Use _to_max_grad_levels_points for BGA
 	if to_max_grad == True:
-		levels_points_name = basename + '_to_max_grad_levels_points'
+		levels_points_name = basename + '_levels_points_to_max_grad'
+		#levels_points_name = basename + '_to_max_grad_levels_points'
 	else:
 		levels_points_name = basename + '_levels_points'
 	
